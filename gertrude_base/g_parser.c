@@ -18,7 +18,7 @@ void parse_args(int ac, char **av)
             exit(0);
         } else if (strcmp(av[i], "--var") == 0) {
             i ++;
-            // variable_def(av, i);
+            variable_def(av, i);
         }
     }
 }

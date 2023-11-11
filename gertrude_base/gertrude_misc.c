@@ -10,7 +10,7 @@
 
 void help(void)
 {
-    my_printf("%sGertrude HELP!\n", RED);
+    my_printf("\n%sGertrude HELP!\n", RED);
     my_printf("\n%sGertrude-CLI, a Makefile tool%s\n", GREEN, NC);
     my_printf("\n%sUSAGE:\n\n\
     %sgertrude%s DIRECTORY [--var variable[=value]]* [[-r rule] [--deps dependencies]* [--cmd command]*]* [-epi]\n\n\n", YELLOW, GREEN, NC);
