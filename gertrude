@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./gertrude_base/gertrude-cli "$@"

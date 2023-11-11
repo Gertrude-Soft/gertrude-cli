@@ -5,9 +5,12 @@
 ## Makefile
 ##
 
-all: compile mv
+all:	compile	mv
 
-compile:
+compile:	clib	mv
+	make -C ./gertrude_base/
+
+clib:
 	make -C lib/my
 
 mv:
@@ -15,8 +18,10 @@ mv:
 
 clean:
 	make clean -C lib/my
+	make clean -C gertrude_base
 
 fclean:
 	rm -f libmy.a lib/my/libmy.a include/my.h lib/libmy.a
+	make fclean -C gertrude_base
 
-re: all
+re: fclean	all

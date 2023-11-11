@@ -7,3 +7,5 @@ test.c
 /include/my.h
 test.txt
 vgcore*
+*.py
+./__pycache__
