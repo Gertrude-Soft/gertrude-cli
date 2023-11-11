@@ -1,0 +1,9 @@
+*a.out
+*my_printf
+*libmy.a
+test.c
+/.vscode/
+*coding-style-reports.log
+/include/my.h
+test.txt
+vgcore*
