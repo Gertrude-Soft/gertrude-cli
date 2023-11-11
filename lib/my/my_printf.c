@@ -44,7 +44,8 @@ static void switch_print_flags_s_c(const char c, va_list list, int *count,
             *count = *count + 1;
             break;
         case 'w':
-            write_in_file(va_arg(list, const char *), va_arg(list, const char *), lp);
+            write_in_file(va_arg(list, const char *),
+            va_arg(list, const char *), lp);
             break;
     }
 }
