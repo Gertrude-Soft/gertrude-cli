@@ -11,6 +11,7 @@
 
 int main(int ac, char **av)
 {
-    my_printf("\n%sGertrude says Welcome!%s\n", GREEN, NC);
+    my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
     parse_args(ac, av);
+    my_printf("\n%sGood Plant%s\n", GREEN, NC);
 }
