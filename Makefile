@@ -24,4 +24,8 @@ fclean:
 	rm -f libmy.a lib/my/libmy.a include/my.h lib/libmy.a
 	make fclean -C gertrude_base
 
+merge:	compile
+	sudo cp -r * /opt/gertrude-cli
+	@echo -e "\033[1;32mGood Plant\033[1;0m"
+
 re: fclean	all
