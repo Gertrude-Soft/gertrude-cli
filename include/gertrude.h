@@ -8,8 +8,15 @@
 #ifndef GERTRUDE_H_
     #define GERTRUDE_H_
 
+typedef struct g_tools_s {
+    int epitech;
+    char *dir;
+    char *variables;
+} gertrude_t;
+
 void help(void);
-void parse_args(int ac, char **av);
-void variable_def(char **av, int i);
+void parse_args(int ac, char **av, gertrude_t *ger);
+void variable_def(char **av, int i, gertrude_t *ger);
+void directory_def(gertrude_t *ger, char **av, int i);
 
 #endif /* !GERTRUDE_H_ */

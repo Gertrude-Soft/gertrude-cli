@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "my.h"
+#include "../../include/text_mod.h"
 
 static void parse_buffer(char *buffer, format_t *lp, const char *string)
 {
@@ -36,7 +38,8 @@ int write_in_file(const char *string, const char *filename, format_t *lp)
     char buffer[32000];
 
     if (fd == NULL) {
-        my_printf("Gertrude says, you need to give an existing file!\n");
+        my_printf("%sGertrude says: you need to give an existing file!%s\n",
+        RED, NC);
         return (84);
     }
     fread(buffer, 1, sizeof(buffer), fd);

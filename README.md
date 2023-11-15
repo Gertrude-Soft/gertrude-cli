@@ -2,7 +2,7 @@
 A CLI tool to make the creation of Makefiles easier!
 
 # Prototype
-gertrude DIRECTORY [ --var variable[=value] ]* [ [ -r rule ] [ --deps dependencies ]* [ --cmd command ]* ]*
+gertrude [ -d directory ] [ --var variable[=value] ]* [ [ -r rule ] [ --deps dependencies ]* [ --cmd command ]* ]* [ -epi ]
 
 # Commit norm
 Commits to this project should follow a commit norm.
