@@ -10,10 +10,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include "../include/gertrude.h"
 #include "../include/my.h"
 #include "../include/text_mod.h"
 
-void variable_def(char **av, int i)
+void variable_def(char **av, int i, gertrude_t *ger)
 {
     int j = 0;
     int k = 0;
@@ -45,11 +46,11 @@ void variable_def(char **av, int i)
     strcat(final, "\t=\t");
     strcat(final, value);
     strcat(final, "\n");
-    if (access("Makefile", F_OK) == -1) {
-        open("Makefile", O_CREAT);
-    }
-    my_printf("%sWriting Makefile variable...%s\n", YELLOW, NC);
-    my_printf("%w", "Makefile", final);
+    my_printf("%sWriting Makefile variable to buffer...%s\n", YELLOW, NC);
+    ger->variables = realloc(ger->variables, my_strlen(ger->variables)
+    + my_strlen(final));
+    strcat(ger->variables, final);
+    // my_printf("%w", "Makefile", final);
     free(name);
     free(value);
     free(final);
