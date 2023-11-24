@@ -26,7 +26,7 @@ static void name_def(char **av, int i, gertrude_t *ger)
 
     for (var_name_size = 0; av[i][var_name_size] != '='; var_name_size++)
         if (av[i][var_name_size] ==  '\0')
-            help();
+            help(84);
     if (ger->variables == NULL)
         ger->variables = malloc(var_name_size + 1);
     else
