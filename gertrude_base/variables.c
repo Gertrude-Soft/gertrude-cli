@@ -14,44 +14,33 @@
 #include "../include/my.h"
 #include "../include/text_mod.h"
 
+// Modify ger->variables to store variables
+// gertrude --var example=gertrude
+// test    =    gertrude\n\ntest2    =  test2\n\n
+// my_printf("%w", ger->dir, ger->variables);
+
+static void name_def(char **av, int i, gertrude_t *ger)
+{
+    int var_name_size;
+    int ger_var_size = my_strlen(ger->variables);
+
+    for (var_name_size = 0; av[i][var_name_size] != '='; var_name_size++);
+    if (ger->variables == NULL)
+        ger->variables = malloc(var_name_size + 1);
+    else
+        ger->variables = realloc(ger->variables, sizeof(ger->variables) + var_name_size);
+    for (int j = 0 ; j < var_name_size + ger_var_size; j++)
+        ger->variables[j + ger_var_size] = av[i][j];
+    ger->variables[var_name_size + ger_var_size] = '\0';
+}
+
+static void value_def(char **av, int i, gertrude_t *ger)
+{
+    return;
+}
+
 void variable_def(char **av, int i, gertrude_t *ger)
 {
-    int j = 0;
-    int k = 0;
-    char *name = malloc(sizeof(char *));
-    char *value = malloc(sizeof(char *));
-    char *final = malloc(sizeof(char *));
-
-    while (av[i][j] != '=' && av[i][j] != ' ' && av[i][j] != '\0') {
-        if (av[i][j] >= 'a' && av[i][j] <= 'z')
-            av[i][j] -= 32;
-        name[k] = av[i][j];
-        j ++;
-        k ++;
-    }
-    if (av[i][j] != '=') {
-        value[0] = '4';
-        value[1] = '2';
-    }
-    if (av[i][j] == '=') {
-        j ++;
-        k = 0;
-        while (av[i][j] != ' ' && av[i][j] != '\0') {
-            value[k] = av[i][j];
-            j ++;
-            k ++;
-        }
-    }
-    strcat(final, name);
-    strcat(final, "\t=\t");
-    strcat(final, value);
-    strcat(final, "\n");
-    my_printf("%sWriting Makefile variable to buffer...%s\n", YELLOW, NC);
-    ger->variables = realloc(ger->variables, my_strlen(ger->variables)
-    + my_strlen(final));
-    strcat(ger->variables, final);
-    // my_printf("%w", "Makefile", final);
-    free(name);
-    free(value);
-    free(final);
+    name_def(av, i, ger);
+    value_def(av, i, ger);
 }

@@ -37,6 +37,8 @@ int write_in_file(const char *string, const char *filename, format_t *lp)
     FILE *fd = fopen(filename, "r+");
     char buffer[32000];
 
+    if (string == NULL)
+        return (1);
     if (fd == NULL) {
         my_printf("%sGertrude says: you need to give an existing file!%s\n",
         RED, NC);
