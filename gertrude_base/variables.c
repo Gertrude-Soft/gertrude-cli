@@ -13,6 +13,7 @@
 #include "../include/gertrude.h"
 #include "../include/my.h"
 #include "../include/text_mod.h"
+#include "../include/error_codes.h"
 
 // Modify ger->variables to store variables
 // gertrude --var example=gertrude
@@ -35,7 +36,7 @@ static int name_def(char **av, int i, gertrude_t *ger)
     return var_name_size;
 }
 
-static void value_def(char **av, int i, gertrude_t *ger, int index)
+static void value_def(char **av, int ac, int i, gertrude_t *ger, int index)
 {
     int var_value_size;
     int ger_var_size = my_strlen(ger->variables);
@@ -49,7 +50,7 @@ static void value_def(char **av, int i, gertrude_t *ger, int index)
     strcat(ger->variables, "\t=\t");
     index++;
     if (av[i][index] == '\0') {
-        // add warning value has been defaulted
+        gertrude_errors(av, ac, i, VARWARN);
         ger->variables = realloc(ger->variables, strlen(ger->variables) + 3);
         strcat(ger->variables, "\\\n");
         return;
@@ -64,10 +65,10 @@ static void value_def(char **av, int i, gertrude_t *ger, int index)
     ger->variables[ger_var_size + var_value_size + 5] = '\0';
 }
 
-void variable_def(char **av, int i, gertrude_t *ger)
+void variable_def(char **av, int ac, int i, gertrude_t *ger)
 {
     int index;
 
     index = name_def(av, i, ger);
-    value_def(av, i, ger, index);
+    value_def(av, ac, i, ger, index);
 }
