@@ -9,4 +9,4 @@ test.txt
 vgcore*
 *.py
 ./__pycache__
-/test/
+./test/
