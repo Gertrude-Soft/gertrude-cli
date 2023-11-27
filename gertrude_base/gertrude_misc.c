@@ -5,10 +5,12 @@
 ** Miscellaneous functions
 */
 
+#include <stdlib.h>
+
 #include "../include/my.h"
 #include "../include/text_mod.h"
 
-void help(void)
+void help(int ret)
 {
     my_printf("\n%sGertrude HELP!\n", RED);
     my_printf("\n%sGertrude-CLI, a Makefile tool%s\n", GREEN, NC);
@@ -21,4 +23,5 @@ void help(void)
     --deps : %srule%s will run %sdependencies%s. Each --deps argument can only name one dependecy.\n\n\
     --cmd : %srule%s will run %scommand%s. Each --cmd argument can only state one command.\n\n\
     -epi : Preprends the Epitech Header (2023 style).\n", YELLOW, NC, UL, NC, UL, NC, UL, NC, UL, NC, UL, NC, UL, NC, UL, NC, UL, NC);
+    exit(ret);
 }

@@ -39,7 +39,7 @@ void directory_def(gertrude_t *ger, char **av, int i)
     int fd;
 
     if (is_dir(av[i])) {
-        ger->dir = malloc(my_strlen(av[i] + 10));
+        ger->dir = malloc(my_strlen(av[i]) + 10);
         my_printf("%sChanging directory...%s\n", YELLOW, NC);
         strcpy(ger->dir, av[i]);
         strcat(ger->dir, "/Makefile");
