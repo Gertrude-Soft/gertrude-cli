@@ -66,7 +66,6 @@ static void error_header(char *gercode)
 
 static void custom_gertrude_message(char *gercode)
 {
-    srand(time(0));
     my_printf("== %s%s%s\n",
     FYELLOW,
     (strcmp(gercode, GERWARN) == 0) ?
@@ -154,10 +153,20 @@ static void var_errors(char **av, int ac, int i, char *gercode)
         input_error_formating(av, ac, i, gercode, ERR21);
         put_behavior_bottom(av, i, BERR21, gercode);
     }
-    if (strcmp(gercode, GERWARN) == 1) {
+    if (strcmp(gercode, GERERR) == 0) {
         input_error_formating(av, ac, i, gercode, ERR42);
         put_behavior_bottom(av, i, BERR42, gercode);
+        exit(84);
     }
+}
+
+static void dir_errors(char **av, int ac, int i, char *gercode)
+{
+    error_header(gercode);
+    custom_gertrude_message(gercode);
+    input_error_formating(av, ac, i, gercode, ERR63);
+    put_behavior_bottom(av, i, BERR63, gercode);
+    exit(84);
 }
 
 void gertrude_errors(char **av, int ac, int i, int error)
@@ -166,6 +175,8 @@ void gertrude_errors(char **av, int ac, int i, int error)
         var_errors(av, ac, i, GERWARN);
     if (error == VARERR)
         var_errors(av, ac, i, GERERR);
+    if (error == DIRERR)
+        dir_errors(av, ac, i, GERERR);
     if (error == 911)
         help(84);
     return;
