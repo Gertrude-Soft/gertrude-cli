@@ -7,6 +7,7 @@
 
 #ifndef GER_CONF_H_
     #define GER_CONF_H_
+
     #define TRUE 1
     #define FALSE 0
     #define CONFDIR "/opt/gertrude-cli/include/ger_conf.h"
