@@ -10,3 +10,4 @@ vgcore*
 *.py
 ./__pycache__
 /test/
+/gertrude_base/gertrude-cli
