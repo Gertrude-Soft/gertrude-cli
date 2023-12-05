@@ -17,8 +17,10 @@ mv:
 	cp lib/libmy.a .
 
 clean:
-	make clean -C lib/my
-	make clean -C gertrude_base
+	sudo make clean -C lib/my
+	sudo make clean -C gertrude_base
+	sudo make clean -C /opt/gertrude-cli
+	sudo rm -f vgcore*
 
 fclean:
 	rm -f libmy.a lib/my/libmy.a include/my.h lib/libmy.a

@@ -14,6 +14,7 @@
 #include "../include/error_codes.h"
 #include "../include/text_mod.h"
 #include "../include/gertrude.h"
+#include "../include/ger_conf.h"
 
 const char *GERTRWARNS[] = {"Gertrude is trying to reach you for your extended warranty.",
                             "Gertrude is trying to get your mess in order.",
@@ -40,6 +41,24 @@ const char *GERTERRORS[] = {"Gertrude is asking you to read the docs.",
                             "Gertrude is left in shambles.",
                             "You just got invited to Gertrude's funeral!",
                             "Gertrude hasn't ever witnessed such malpractice."};
+
+const char ERR21[42] = "** Variable affectation without value. **";
+const char BERR21[40] = "Variable has been defaulted to empty \\.";
+
+const char ERR42[47] = "** Variable or positional argument missing. **";
+const char BERR42[43] = "Gertrude no understand, Exited with crash.";
+
+const char ERR63[38] = "** No directory given as argument. **";
+const char BERR63[43] = "Gertrude no understand, Exited with crash.";
+
+const char ERR84[37] = "** Rule specified without a name. **";
+const char BERR84[43] = "Gertrude no understand, Exited with crash.";
+
+const char ERR105[48] = "** Dependency specified without a rule name. **";
+const char BERR105[26] = "No dependencies affected.";
+
+const char ERR126[42] = "** Command specified without following **";
+const char BERR126[20] = "No commands affeced";
 
 static void error_header(char *gercode)
 {
@@ -114,7 +133,7 @@ static void point_to_error(char *error, int err_index, char *gercode)
 }
 
 static void input_error_formating(char **av, int ac, int i, char *gercode,
-    char *error)
+    char error[])
 {
     int err_index;
 
@@ -127,12 +146,14 @@ static void put_behavior_bottom(char **av, int i, char *behavior, char *gercode)
 {
     char *name;
     int size;
+    int j;
 
     for (size = 0; av[i][size] != '\0' && av[i][size] != '=' && size != (ERROR_WIDTH - strlen(behavior) - 14); size++);
     name = malloc(size + 1);
-    for (int j = 0; j < size; j++) {
+    for (j = 0; j < size; j++) {
         name[j] = av[i][j];
     }
+    name[j] = '\0';
     if (size == (ERROR_WIDTH - strlen(behavior) - 14)) {
         name[size - 3] = '.';
         name[size - 2] = '.';
@@ -150,12 +171,12 @@ static void var_errors(char **av, int ac, int i, char *gercode)
     error_header(gercode);
     custom_gertrude_message(gercode);
     if (strcmp(gercode, GERWARN) == 0) {
-        input_error_formating(av, ac, i, gercode, ERR21);
-        put_behavior_bottom(av, i, BERR21, gercode);
+        input_error_formating(av, ac, i, gercode, (char *)ERR21);
+        put_behavior_bottom(av, i, (char *)BERR21, gercode);
     }
     if (strcmp(gercode, GERERR) == 0) {
-        input_error_formating(av, ac, i, gercode, ERR42);
-        put_behavior_bottom(av, i, BERR42, gercode);
+        input_error_formating(av, ac, i, gercode, (char *)ERR42);
+        put_behavior_bottom(av, i, (char *)BERR42, gercode);
         exit(84);
     }
 }
@@ -164,9 +185,34 @@ static void dir_errors(char **av, int ac, int i, char *gercode)
 {
     error_header(gercode);
     custom_gertrude_message(gercode);
-    input_error_formating(av, ac, i, gercode, ERR63);
-    put_behavior_bottom(av, i, BERR63, gercode);
+    input_error_formating(av, ac, i, gercode, (char *)ERR63);
+    put_behavior_bottom(av, i, (char *)BERR63, gercode);
     exit(84);
+}
+
+static void rule_errors(char **av, int ac, int i, char *gercode)
+{
+    error_header(gercode);
+    custom_gertrude_message(gercode);
+    input_error_formating(av, ac, i, gercode, (char *)ERR84);
+    put_behavior_bottom(av, i, (char *)BERR84, gercode);
+    exit(84);
+}
+
+static void dep_warn(char **av, int ac, int i, char *gercode)
+{
+    error_header(gercode);
+    custom_gertrude_message(gercode);
+    input_error_formating(av, ac, i, gercode, (char *)ERR105);
+    put_behavior_bottom(av, i, (char *)BERR105, gercode);
+}
+
+static void cmd_warn(char **av, int ac, int i, char *gercode)
+{
+    error_header(gercode);
+    custom_gertrude_message(gercode);
+    input_error_formating(av, ac, i, gercode, (char *)ERR126);
+    put_behavior_bottom(av, i, (char *)BERR126, gercode);
 }
 
 void gertrude_errors(char **av, int ac, int i, int error)
@@ -177,6 +223,12 @@ void gertrude_errors(char **av, int ac, int i, int error)
         var_errors(av, ac, i, GERERR);
     if (error == DIRERR)
         dir_errors(av, ac, i, GERERR);
+    if (error == RULERR)
+        rule_errors(av, ac, i, GERERR);
+    if (error == DEPWARN)
+        dep_warn(av, ac, i, GERWARN);
+    if (error == CMDWARN)
+        cmd_warn(av, ac, i, GERWARN);
     if (error == 911)
         help(84);
     return;
