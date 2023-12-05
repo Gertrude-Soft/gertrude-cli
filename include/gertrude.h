@@ -6,12 +6,12 @@
 */
 
 #ifndef GERTRUDE_H_
-#define GERTRUDE_H_
+    #define GERTRUDE_H_
 
 typedef struct g_tools_s {
-  int epitech;
-  char *dir;
-  char *variables;
+    int epitech;
+    char *dir;
+    char *variables;
 } gertrude_t;
 
 void help(int);
