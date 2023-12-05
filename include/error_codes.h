@@ -20,5 +20,7 @@
     #define BERR21 "Variable has been defaulted to empty \\."
     #define ERR42 "** Variable or positional argument missing. **"
     #define BERR42 "Gertrude no understand, Exited with crash."
+    #define ERR63 "** No directory given as argument. **"
+    #define BERR63 "Gertrude no understand, Exited with crash."
 
 #endif

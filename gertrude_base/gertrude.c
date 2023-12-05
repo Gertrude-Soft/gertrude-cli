@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <time.h>
 
 #include "../include/my.h"
 #include "../include/text_mod.h"
@@ -15,6 +16,7 @@ int main(int ac, char **av)
 {
     gertrude_t ger;
 
+    srand(time(0));
     ger.dir = "./Makefile";
     ger.epitech = 0;
     ger.variables = NULL;
