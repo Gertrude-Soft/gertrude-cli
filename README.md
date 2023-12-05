@@ -56,13 +56,13 @@ gertrude [options](#flags)
 
 ## Flags
 
-- -d *OPTIONAL* : Should specify a directory. [See Example](#directory)
-- \--var or -v *OPTIONAL* : Should specify a variable. [See Example](#variables)
-- \--rule or -r *OPTIONAL* : Should specify a rules with *deps* and *cmds*. [See Example](#rules)
-    - \--deps or -D : Should specify dependency for the given rule.
-    - \--cmd or -c : Should specify a command for the given rule.
-- \--epi or -e *OPTIONAL* : Creates a prefilled header for Makefiles. [See Example](#epiheader)
-- *config* : Configure gertrude **as you wish!** [See Example](#config)
+- **-d** *OPTIONAL* : Should specify a directory. [See Example](#directory)
+- **\--var** or **-v** *OPTIONAL* : Should specify a variable. [See Example](#variables)
+- **\--rule** or **-r** *OPTIONAL* : Should specify a rules with *deps* and *cmds*. [See Example](#rules)
+    - **\--deps** or **-D** : Should specify dependency for the given rule.
+    - **\--cmd** or **-c** : Should specify a command for the given rule.
+- **\--epi** or **-e** *OPTIONAL* : Creates a prefilled header for Makefiles. [See Example](#epiheader)
+- **config** : Configure gertrude **as you wish!** [See Example](#config)
 
 If Gertrude is called without options, it will generate a basic Makefile that you can modify in the directory where you executed her.
 
@@ -71,10 +71,10 @@ If Gertrude is called without options, it will generate a basic Makefile that yo
 	- ```gertrude -d path/to/lib/ [...]``` ==> Gertrude will create a Makefile in the specified directory path/to/lib/
 
 - #### Variables
-	- ```gertrude -v SRC=$(wildcard *.c)``` ==> Gertrude will create a Makefile containing the specified variable with name SRC and value $(wildcard *.c)
+	- ```gertrude -v SRC="$(wildcard *.c)"``` ==> Gertrude will create a Makefile containing the specified variable with name SRC and value $(wildcard *.c)
 
 - #### Rules
-	- ```gertrude -r all -D compile,clean --cmd "echo Good Plant"``` ==> Gertrude will create a Makefile with the rule 'all' which will depend on 'compile' and 'clean', and will execute the command ```echo Good Plant```
+	- ```gertrude -r lib -D $(OBJS_LIB) --cmd "echo Good Plant"``` ==> Gertrude will create a Makefile with the rule 'lib' which will depend on the object files for the lib, and will execute the command ```echo Good Plant```
 
 - #### EpiHeader
 	- ```gertrude [...] --epi``` ==> The Makefile will be started with the standard EPITECH school's header which is as follows:
