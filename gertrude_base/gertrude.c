@@ -21,6 +21,10 @@ int main(int ac, char **av)
     ger.epitech = 0;
     ger.variables = NULL;
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
+    if (ac == 1) {
+        base_mkf();
+        exit(0);
+    }
     parse_args(ac, av, &ger);
     my_printf("%sFinalising...%s\n", YELLOW, NC);
     // my_printf("%w", ger.dir, ger.variables);
