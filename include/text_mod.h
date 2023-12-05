@@ -10,8 +10,9 @@
     #define GREEN "\033[1;32m"
     #define RED "\033[1;31m"
     #define YELLOW "\033[1;33m"
+    #define MAGENTA "\033[1;35m"
+    #define FYELLOW "\033[0;33m"
     #define NC "\033[1;0m"
-
     #define UL "\033[4m"
 
 #endif /* !COLOURS_H_ */

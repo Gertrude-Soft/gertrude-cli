@@ -17,7 +17,7 @@ void parse_args(int ac, char **av, gertrude_t *ger)
             help(0);
         } else if (strcmp(av[i], "--var") == 0) {
             i ++;
-            variable_def(av, i, ger);
+            variable_def(av, ac, i, ger);
         } else if (strcmp(av[i], "-d") == 0) {
             i ++;
             directory_def(ger, av, i);
