@@ -18,7 +18,7 @@ CFLAGS	+=	-Wall -g3
 
 all:	build	clean
 
-build:	$(OBJ)	gertrude
+build:	${OBJ}	gertrude
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
 
 clean:
