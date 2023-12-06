@@ -12,6 +12,8 @@ typedef struct g_tools_s {
     int epitech;
     char *dir;
     char *variables;
+    char *deps;
+    char *cmds;
     char *rules;
     char *header;
 } gertrude_t;

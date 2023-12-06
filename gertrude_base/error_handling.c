@@ -58,7 +58,7 @@ const char ERR105[48] = "** Dependency specified without a rule name. **";
 const char BERR105[26] = "No dependencies affected.";
 
 const char ERR126[42] = "** Command specified without following **";
-const char BERR126[20] = "No commands affeced";
+const char BERR126[20] = "No commands affeced.";
 
 static void error_header(char *gercode)
 {
