@@ -32,6 +32,8 @@ cd gertrude-cli
 ./installer.sh
 ```
 
+We also advise everyone to check ```gertrude config``` before using to make gertrude behave as you wish! [Config](#config)
+
 Everything is done! 🌱
 
 # Updating
