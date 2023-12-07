@@ -80,6 +80,7 @@ static void error_header(char *gercode)
         my_printf("=");
     }
     my_printf("\n");
+    free(err_name);
     return;
 }
 
@@ -164,6 +165,7 @@ static void put_behavior_bottom(char **av, int i, char *behavior, char *gercode)
     for (int j = 0; j < ERROR_WIDTH; j++)
         my_printf("=");
     my_printf("\n\n");
+    free(name);
 }
 
 static void var_errors(char **av, int ac, int i, char *gercode)

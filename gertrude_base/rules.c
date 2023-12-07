@@ -91,5 +91,9 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
     strcat(ger->rules, ger->deps);
     strcat(ger->rules, ger->cmds);
     strcat(ger->rules, "\n\n");
+    free(ger->deps);
+    free(ger->cmds);
+    ger->deps = NULL;
+    ger->cmds = NULL;
     *i -= 1;
 }

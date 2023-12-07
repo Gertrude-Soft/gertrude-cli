@@ -29,4 +29,7 @@ void base_mkf(void);
 void gertrude_errors(char **av, int ac, int i, int error);
 char *set_phony(gertrude_t *gertrude);
 
+
+void free_gaza(gertrude_t *ger);
+
 #endif /* !GERTRUDE_H_ */
