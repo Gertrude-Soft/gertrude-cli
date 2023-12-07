@@ -11,12 +11,11 @@
 #include "../include/error_codes.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 void rule_def(char **av, int ac, int *i, gertrude_t *ger)
 {
-    int deps = 0;
+    int index = 0;
 
-    while (strcmp(av[*i], "--deps") == 0 || strcmp(av[*i], "--cmd") == 0) {
-        return;
-    }
+    return;
 }
