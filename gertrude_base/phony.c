@@ -6,6 +6,7 @@
 */
 
 #include "../include/gertrude.h"
+#include "../include/ger_conf.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -19,13 +20,24 @@ char *set_phony(gertrude_t *ger)
         return NULL;
     }
     strcpy(phony, ".PHONY:\t");
+    if (REMARKABLE == TRUE) {
+        phony = realloc(phony, strlen(phony) + strlen("all\tclean\tfclean\tre") + 1);
+        strcat(phony, "all\tclean\tfclean\tre");
+        if (ger->rule_names == NULL) {
+            phony = realloc(phony, strlen(phony) + 2);
+            strcat(phony, "\n");
+        } else {
+            phony = realloc(phony, strlen(phony) + 2);
+            strcat(phony, "\t");
+        }
+    }
     for (int i = 0; ger->rule_names[i] != NULL; i ++) {
-        phony = realloc(phony, sizeof(phony) + strlen(ger->rule_names[i]) + 2);
+        phony = realloc(phony, strlen(phony) + strlen(ger->rule_names[i]) + 2);
         strcat(phony, ger->rule_names[i]);
         if (ger->rule_names[i + 1] != NULL)
             strcat(phony, "\t");
-        else
-            strcat(phony, "\n\0");
     }
+    phony = realloc(phony, strlen(phony) + strlen("\tgertrude\n") + 1);
+    strcat(phony, "\tgertrude\n");
     return phony;
 }
