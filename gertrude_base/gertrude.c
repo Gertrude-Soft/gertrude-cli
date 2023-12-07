@@ -62,6 +62,10 @@ int main(int ac, char **av)
     }
     ger.epitech = 0;
     ger.variables = NULL;
+    ger.rule_names = NULL;
+    ger.deps = NULL;
+    ger.cmds = NULL;
+    ger.rules = NULL;
     ger.header = DEFAULT_HEADER;
     ger.rule_names = NULL;
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
