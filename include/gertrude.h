@@ -14,6 +14,7 @@ typedef struct g_tools_s {
     char *variables;
     char *deps;
     char *cmds;
+    char **rule_names;
     char *rules;
     char *header;
 } gertrude_t;
