@@ -12,8 +12,12 @@ typedef struct g_tools_s {
     int epitech;
     char *dir;
     char *variables;
+    char *deps;
+    char *cmds;
+    char **rule_names;
     char *rules;
     char *header;
+    char *phony;
 } gertrude_t;
 
 void help(int);
@@ -23,5 +27,6 @@ void directory_def(gertrude_t *ger, char **av, int i);
 void rule_def(char **av, int ac, int *i, gertrude_t *ger);
 void base_mkf(void);
 void gertrude_errors(char **av, int ac, int i, int error);
+char *set_phony(gertrude_t *gertrude);
 
 #endif /* !GERTRUDE_H_ */
