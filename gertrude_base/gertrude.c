@@ -32,7 +32,7 @@ static void print_file(gertrude_t *ger)
     my_printf("%s", REM_GERTRUDE);
     if (AUTO_PHONY == TRUE && ger->phony != NULL)
         my_printf("%s", ger->phony);
-    my_printf("\n---------------------\n"); // END OF DEBUG PRINTF (replace %s with %w for deployment)
+    my_printf("-----------------\n"); // END OF DEBUG PRINTF (replace %s with %w for deployment)
 }
 
 static void configuration_command(void)
@@ -45,6 +45,7 @@ static void configuration_command(void)
     strcat(command, " ");
     strcat(command, CONFDIR);
     system(command);
+    free(command);
     system("sudo make --silent -C /opt/gertrude-cli");
     exit(0);
 }
@@ -55,7 +56,8 @@ int main(int ac, char **av)
     int fd;
 
     srand(time(0));
-    ger.dir = "./Makefile";
+    ger.dir = malloc(strlen("./Makefile") + 1);
+    strcpy(ger.dir, "./Makefile");
     if (access(ger.dir, F_OK) == -1) {
         fd = open(ger.dir, O_CREAT);
         close(fd);
@@ -67,7 +69,6 @@ int main(int ac, char **av)
     ger.cmds = NULL;
     ger.rules = NULL;
     ger.header = DEFAULT_HEADER;
-    ger.rule_names = NULL;
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
     if (ac == 1) {
         base_mkf();
@@ -86,4 +87,6 @@ int main(int ac, char **av)
     ger.phony = set_phony(&ger);
     print_file(&ger);
     my_printf("\n%sGood Plant%s\n", GREEN, NC);
+    free_gaza(&ger);
+    return 0;
 }

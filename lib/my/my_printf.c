@@ -87,6 +87,7 @@ static void print_chars(const char *format, va_list list, int *count)
         switch_print_flags_f_g_p_n(format[i + 1], list, count, lp);
         i++;
     }
+    free(lp);
 }
 
 int my_printf(const char *format, ...)
