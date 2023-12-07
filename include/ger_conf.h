@@ -30,8 +30,12 @@
 // the specified pattern - default "vgcore*"
     #define EXTRA "vgcore*"
 
-// This defines whether to include a header or not in the Makefile
+// This defines whether to include a header or not in the Makefile - default TRUE
     #define HEADER TRUE
+
+// This defines whether your rules are added to a .PHONY at the end of the
+// generated Makefile (recommended TRUE) - default TRUE
+    #define AUTO_PHONY TRUE
 
 // This is the default header that will be used in the Makefile, you can
 // modify it freely but be careful with the formatting.
@@ -63,6 +67,6 @@
     #define REM_FCLEAN "fclean:\tclean\n\trm -f $(NAME)\n\n"
     #define REM_RE "re:\tfclean\tall\n\n"
 
-    #define REM_GERTRUDE "gertrude:\n\t@echo -e \"\\n\\n\\033[3mGertrude-CLI - Makefile creation tool\\033[0m\\n\"\n"
+    #define REM_GERTRUDE "gertrude:\n\t@echo -e \"\\n\\n\\033[3mGertrude-CLI - Makefile creation tool\\033[0m\\n\"\n\n"
 
 #endif /* !GER_CONF_H_ */
