@@ -16,6 +16,7 @@
 void rule_def(char **av, int ac, int *i, gertrude_t *ger)
 {
     int index = 0;
+    size_t size;
 
     if (ger->rule_names == NULL) {
         ger->rule_names = malloc(strlen(av[*i]) + sizeof(NULL) + 10);
@@ -80,7 +81,10 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
         }
     }
     if (ger->rules == NULL) {
-        ger->rules = malloc(strlen(ger->rule_names[index]) + strlen(ger->deps) + strlen(ger->cmds) + 4);
+        size = strlen(ger->rule_names[index]);
+        size += (ger->deps != NULL) ? strlen(ger->deps) : 0;
+        size += (ger->cmds != NULL) ? strlen(ger->cmds) : 0;
+        ger->rules = malloc(size + 4);
         strcpy(ger->rules, ger->rule_names[index]);
     }
     else {
@@ -88,11 +92,15 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
         strcat(ger->rules, ger->rule_names[index]);
     }
     strcat(ger->rules, ":");
-    strcat(ger->rules, ger->deps);
-    strcat(ger->rules, ger->cmds);
+    if (ger->deps != NULL) {
+        strcat(ger->rules, ger->deps);
+        free(ger->deps);
+    }
+    if (ger->cmds != NULL) {
+        strcat(ger->rules, ger->cmds);
+        free(ger->cmds);
+    }
     strcat(ger->rules, "\n\n");
-    free(ger->deps);
-    free(ger->cmds);
     ger->deps = NULL;
     ger->cmds = NULL;
     *i -= 1;
