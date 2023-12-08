@@ -18,21 +18,22 @@
 
 static void print_file(gertrude_t *ger)
 {
-    my_printf("\n\n-------OUTPUT------\n"); // START OF DEBUG PRINTF
+    my_printf("%sFinalising...%s\n", YELLOW, NC);
     if (HEADER == TRUE)
-        my_printf("%s", ger->header);
+        my_printf("%w", ger->dir, ger->header);
     if (ger->variables != NULL)
-        my_printf("%s", ger->variables);
+        my_printf("%w", ger->dir, ger->variables);
+    if (ger->rules != NULL)
+        my_printf("%w", ger->dir, ger->rules);
     if (REMARKABLE == TRUE) {
-        my_printf("%s", REM_ALL);
-        my_printf("%s", REM_CLEAN);
-        my_printf("%s", REM_FCLEAN);
-        my_printf("%s", REM_RE);
+        my_printf("%w", ger->dir, REM_ALL);
+        my_printf("%w", ger->dir, REM_CLEAN);
+        my_printf("%w", ger->dir, REM_FCLEAN);
+        my_printf("%w", ger->dir, REM_RE);
     }
-    my_printf("%s", REM_GERTRUDE);
+    my_printf("%w", ger->dir, REM_GERTRUDE);
     if (AUTO_PHONY == TRUE && ger->phony != NULL)
-        my_printf("%s", ger->phony);
-    my_printf("-----------------\n"); // END OF DEBUG PRINTF (replace %s with %w for deployment)
+        my_printf("%w", ger->dir, ger->phony);
 }
 
 static void configuration_command(void)
@@ -71,7 +72,9 @@ int main(int ac, char **av)
     ger.header = DEFAULT_HEADER;
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
     if (ac == 1) {
+        my_printf("%sGetting standard Makefile...%s\n", YELLOW, NC);
         base_mkf();
+        my_printf("\n%sGood Plant%s\n", GREEN, NC);
         exit(0);
     }
     if (strcmp(av[1], "config") == 0) {
@@ -83,7 +86,6 @@ int main(int ac, char **av)
         exit(0);
     }
     parse_args(ac, av, &ger);
-    my_printf("%sFinalising...%s\n", YELLOW, NC);
     ger.phony = set_phony(&ger);
     print_file(&ger);
     my_printf("\n%sGood Plant%s\n", GREEN, NC);

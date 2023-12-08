@@ -12,20 +12,20 @@ OBJ	=	$(SRC:.c=.o)
 
 CC	=	gcc
 
-NAME	=	a.out
+EXEC	=	a.out
 
 CFLAGS	+=	-Wall -g3
 
 all:	build	clean
 
 build:	${OBJ}	gertrude
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
+	$(CC) -o $(EXEC) $(OBJ) $(CFLAGS)
 
 clean:
 	rm -f vgcore.* $(OBJ) *.gch
 
 fclean:	clean
-	rm -f $(NAME)
+	rm -f $(EXEC)
 
 re:	fclean	all
 
