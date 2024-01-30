@@ -32,10 +32,8 @@ static int update_rule_name_list(char **av, int ac, int *i, gertrude_t *ger)
     strcpy(ger->rule_names[index], av[*i]);
     ger->rule_names[index + 1] = NULL;
     *i += 1;
-    ger->cmds = malloc(1);
-    ger->deps = malloc(1);
-    strcpy(ger->cmds, "\0");
-    strcpy(ger->deps, "\0");
+    ger->cmds = strdup("\0");
+    ger->deps = strdup("\0");
     return (index);
 }
 
