@@ -20,7 +20,7 @@ static void print_file(gertrude_t *ger)
 {
     my_printf("%sFinalising...%s\n", YELLOW, NC);
     if (HEADER == TRUE)
-        my_printf("%w", ger->dir, ger->header);
+        print_header(ger);
     if (ger->variables != NULL)
         my_printf("%w", ger->dir, ger->variables);
     if (ger->rules != NULL)
@@ -63,7 +63,6 @@ int main(int ac, char **av)
         fd = open(ger.dir, O_CREAT);
         close(fd);
     }
-    ger.epitech = 0;
     ger.variables = NULL;
     ger.rule_names = NULL;
     ger.deps = NULL;

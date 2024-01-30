@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2023
+** GERTRUDE PROJECT, 2023
 ** gertrude-cli
 ** File description:
 ** gertrude
@@ -9,7 +9,6 @@
     #define GERTRUDE_H_
 
 typedef struct g_tools_s {
-    int epitech;
     char *dir;
     char *variables;
     char *deps;
@@ -27,6 +26,7 @@ void directory_def(gertrude_t *ger, char **av, int i);
 void rule_def(char **av, int ac, int *i, gertrude_t *ger);
 void base_mkf(void);
 void gertrude_errors(char **av, int ac, int i, int error);
+void print_header(gertrude_t *ger);
 char *set_phony(gertrude_t *gertrude);
 
 
