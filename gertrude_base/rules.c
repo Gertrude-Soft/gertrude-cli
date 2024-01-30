@@ -57,8 +57,6 @@ static void handle_deps(char **av, int ac, int *i, gertrude_t *ger)
 
 static void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
 {
-    char *seperator;
-
     if (*i == ac - 1) {
         gertrude_errors(av, ac, *i, CMDWARN);
         return;
@@ -67,11 +65,9 @@ static void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
         gertrude_errors(av, ac, *i, CMDWARN);
         return;
     }
-    seperator = ger->cmds == NULL ? malloc(3) : malloc(2);
-    strcpy(seperator, ger->cmds == NULL ? "\n\t" : "\n");
     ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i + 1]) +
-    strlen(seperator) + 1);
-    strcat(ger->cmds, seperator);
+    strlen("\n    ") + 1);
+    strcat(ger->cmds, "\n    ");
     strcat(ger->cmds, av[*i + 1]);
     return;
 }
@@ -106,9 +102,11 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
     strcmp(av[*i], "-c") == 0)) {
         if (strcmp(av[*i], "--deps") == 0 || strcmp(av[*i], "-D") == 0) {
             handle_deps(av, ac, i, ger);
+            *i += 1;
         }
         if (strcmp(av[*i], "--cmd") == 0 || strcmp(av[*i], "-c") == 0) {
             handle_cmds(av, ac, i, ger);
+            *i += 1;
         }
         *i += 1;
     }

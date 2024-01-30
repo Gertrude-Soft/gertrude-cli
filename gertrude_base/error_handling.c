@@ -5,10 +5,8 @@
 ** error_handling
 */
 
-#include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "../include/my.h"
 #include "../include/error_codes.h"
