@@ -5,7 +5,6 @@
 ** A CLI-based Makefile Tool
 */
 
-#include <stdlib.h>
 #include <string.h>
 
 #include "../include/gertrude.h"

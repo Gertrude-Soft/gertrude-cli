@@ -1,0 +1,13 @@
+#!/bin/env python3
+##
+## EPITECH PROJECT, 2023
+## gertrude-cli
+## File description:
+## intellitrude
+##
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
