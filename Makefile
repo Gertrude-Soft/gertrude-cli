@@ -19,12 +19,14 @@ mv:
 clean:
 	sudo make clean -C lib/my
 	sudo make clean -C gertrude_base
-	sudo make clean -C /opt/gertrude-cli
 	sudo rm -f vgcore*
 
 fclean:
 	rm -f libmy.a lib/my/libmy.a include/my.h lib/libmy.a
 	make fclean -C gertrude_base
+
+gclean:	clean
+	sudo make clean -C /opt/gertrude-cli
 
 merge:	compile
 	sudo cp -r * /opt/gertrude-cli
