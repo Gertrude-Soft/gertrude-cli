@@ -1,5 +1,5 @@
 /*
-** GERTRUDE PROJECT, 2023;
+** GERTRUDE PROJECT, 2023
 ** gertrude-cli
 ** File description:
 ** gertrude
