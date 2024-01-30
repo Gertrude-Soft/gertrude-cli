@@ -13,11 +13,10 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-static void final(char *buffer, gertrude_t *ger, struct stat *statbuf)
+static void final(char *buffer, gertrude_t *ger)
 {
     my_printf("%w", ger->dir, buffer);
     free(buffer);
-    free(statbuf);
 }
 
 void print_header(gertrude_t *ger)
@@ -41,5 +40,5 @@ void print_header(gertrude_t *ger)
     }
     buffer[size + 1] = '\0';
     fclose(fp);
-    final(buffer, ger, &statbuf);
+    final(buffer, ger);
 }
