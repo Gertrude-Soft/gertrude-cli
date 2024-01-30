@@ -38,7 +38,7 @@ void print_header(gertrude_t *ger)
         fprintf(stderr, "%sError reading header prebuilt file%s\n", RED, NC);
         exit(84);
     }
-    buffer[size + 1] = '\0';
+    buffer[size] = '\0';
     fclose(fp);
     final(buffer, ger);
 }
