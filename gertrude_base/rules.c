@@ -12,7 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int tab_len(char **tab)
+static int tab_len(char **tab)
 {
     int count = 0;
 
@@ -21,7 +21,7 @@ int tab_len(char **tab)
     return (count);
 }
 
-int update_rule_name_list(char **av, int ac, int *i, gertrude_t *ger)
+static int update_rule_name_list(char **av, int ac, int *i, gertrude_t *ger)
 {
     int index = 0;
 
@@ -39,60 +39,44 @@ int update_rule_name_list(char **av, int ac, int *i, gertrude_t *ger)
     return (index);
 }
 
-void handle_deps(char **av, int ac, int *i, gertrude_t *ger)
+static void handle_deps(char **av, int ac, int *i, gertrude_t *ger)
 {
     if (*i == ac - 1) {
         gertrude_errors(av, ac, *i, DEPWARN);
-        *i += 1;
         return;
     }
     if (av[*i + 1][0] == '-') {
         gertrude_errors(av, ac, *i, DEPWARN);
-        *i += 1;
         return;
     }
-    *i += 1;
-    if (ger->deps == NULL) {
-        ger->deps = malloc(strlen(av[*i]) + 2);
-        strcpy(ger->deps, "\t");
-        strcat(ger->deps, av[*i]);
-    } else {
-        ger->deps = realloc(ger->deps, strlen(ger->deps) + strlen(av[*i]) + 2);
-        strcat(ger->deps, "\t");
-        strcat(ger->deps, av[*i]);
-    }
-    if (*i + 1 != ac)
-        *i += 1;
+    ger->deps = realloc(ger->deps, strlen(ger->deps) + strlen(av[*i + 1]) + 2);
+    strcat(ger->deps, "\t");
+    strcat(ger->deps, av[*i + 1]);
     return;
 }
 
-void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
+static void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
 {
+    char *seperator;
+
     if (*i == ac - 1) {
         gertrude_errors(av, ac, *i, CMDWARN);
-        *i += 1;
         return;
     }
     if (av[*i + 1][0] == '-') {
         gertrude_errors(av, ac, *i, CMDWARN);
-        *i += 1;
         return;
     }
-    *i += 1;
-    if (ger->cmds == NULL) {
-        ger->cmds = malloc(strlen(av[*i]) + 3);
-        strcpy(ger->cmds, "\n\t");
-        strcat(ger->cmds, av[*i]);
-    } else {
-        ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i]) + 2);
-        strcat(ger->cmds, "\n");
-        strcat(ger->cmds, av[*i]);
-    }
-    *i += 1;
+    seperator = ger->cmds == NULL ? malloc(3) : malloc(2);
+    strcpy(seperator, ger->cmds == NULL ? "\n\t" : "\n");
+    ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i + 1]) +
+    strlen(seperator) + 1);
+    strcat(ger->cmds, seperator);
+    strcat(ger->cmds, av[*i + 1]);
     return;
 }
 
-void bufferize(char **av, int ac, int *i, gertrude_t *ger, int index)
+static void bufferize(char **av, int ac, int *i, gertrude_t *ger, int index)
 {
     ger->rules = realloc(ger->rules, strlen(ger->rules) +
     strlen(ger->rule_names[index]) + strlen(ger->deps) +
@@ -126,6 +110,7 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
         if (strcmp(av[*i], "--cmd") == 0 || strcmp(av[*i], "-c") == 0) {
             handle_cmds(av, ac, i, ger);
         }
+        *i += 1;
     }
     bufferize(av, ac, i, ger, index);
 }
