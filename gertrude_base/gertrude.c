@@ -69,8 +69,7 @@ int main(int ac, char **av)
     ger.rule_names[0] = NULL;
     ger.deps = NULL;
     ger.cmds = NULL;
-    ger.rules = malloc(1);
-    strcpy(ger.rules, "\0");
+    ger.rules = strdup("\0");
     ger.header = DEFAULT_HEADER;
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
     if (ac == 1) {
