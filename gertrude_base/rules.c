@@ -1,96 +1,81 @@
 /*
-** EPITECH PROJECT, 2023
-** gertrude-cli
+** GERTRUDE PROJECT, 2023
+** Gertrude-CLI
 ** File description:
-** rules
+** Rules
 */
 
 #include "../include/gertrude.h"
 #include "../include/my.h"
-#include "../include/text_mod.h"
 #include "../include/error_codes.h"
 
 #include <string.h>
 #include <stdlib.h>
 
-void rule_def(char **av, int ac, int *i, gertrude_t *ger)
+static int tab_len(char **tab)
+{
+    int count = 0;
+
+    while (tab[count] != NULL)
+        count++;
+    return (count);
+}
+
+static int update_rule_name_list(char **av, int ac, int *i, gertrude_t *ger)
 {
     int index = 0;
-    size_t size;
 
-    if (ger->rule_names == NULL) {
-        ger->rule_names = malloc(strlen(av[*i]) + sizeof(NULL) + 10);
-        ger->rule_names[0] = NULL;
-    }
-    else
-        ger->rule_names = realloc(ger->rule_names, sizeof(ger->rule_names) + sizeof(NULL) + 10);
-    for (; ger->rule_names[index] != NULL; index++);
+    ger->rule_names = realloc(ger->rule_names,
+    sizeof(char *) * tab_len(ger->rule_names) + sizeof(char *) + sizeof(NULL));
+    for (; ger->rule_names[index] != NULL; index += 1);
     ger->rule_names[index] = malloc(strlen(av[*i]) + 1);
     strcpy(ger->rule_names[index], av[*i]);
     ger->rule_names[index + 1] = NULL;
     *i += 1;
-    while (*i < ac && (strcmp(av[*i], "--deps") == 0 || strcmp(av[*i], "-D") == 0 || strcmp(av[*i], "--cmd") == 0 || strcmp(av[*i], "-c") == 0)) {
-        if (strcmp(av[*i], "--deps") == 0 || strcmp(av[*i], "-D") == 0) {
-            if (*i == ac - 1) {
-                gertrude_errors(av, ac, *i, DEPWARN);
-                *i += 1;
-                continue;
-            }
-            if (av[*i + 1][0] == '-') {
-                gertrude_errors(av, ac, *i, DEPWARN);
-                *i += 1;
-                continue;
-            }
-            *i += 1;
-            if (ger->deps == NULL) {
-                ger->deps = malloc(strlen(av[*i]) + 2);
-                strcpy(ger->deps, "\t");
-                strcat(ger->deps, av[*i]);
-            } else {
-                ger->deps = realloc(ger->deps, strlen(ger->deps) + strlen(av[*i]) + 2);
-                strcat(ger->deps, "\t");
-                strcat(ger->deps, av[*i]);
-            }
-            if (*i + 1 != ac)
-                *i += 1;
-            continue;
-        }
-        if (strcmp(av[*i], "--cmd") == 0 || strcmp(av[*i], "-c") == 0) {
-            if (*i == ac - 1) {
-                gertrude_errors(av, ac, *i, CMDWARN);
-                *i += 1;
-                continue;
-            }
-            if (av[*i + 1][0] == '-') {
-                gertrude_errors(av, ac, *i, CMDWARN);
-                *i += 1;
-                continue;
-            }
-            *i += 1;
-            if (ger->cmds == NULL) {
-                ger->cmds = malloc(strlen(av[*i]) + 3);
-                strcpy(ger->cmds, "\n\t");
-                strcat(ger->cmds, av[*i]);
-            } else {
-                ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i]) + 2);
-                strcat(ger->cmds, "\n");
-                strcat(ger->cmds, av[*i]);
-            }
-            *i += 1;
-            continue;
-        }
+    ger->cmds = strdup("\0");
+    ger->deps = strdup("\0");
+    return (index);
+}
+
+static void handle_deps(char **av, int ac, int *i, gertrude_t *ger)
+{
+    if (*i == ac - 1) {
+        gertrude_errors(av, ac, *i, DEPWARN);
+        return;
     }
-    if (ger->rules == NULL) {
-        size = strlen(ger->rule_names[index]);
-        size += (ger->deps != NULL) ? strlen(ger->deps) : 0;
-        size += (ger->cmds != NULL) ? strlen(ger->cmds) : 0;
-        ger->rules = malloc(size + 4);
-        strcpy(ger->rules, ger->rule_names[index]);
+    if (av[*i + 1][0] == '-') {
+        gertrude_errors(av, ac, *i, DEPWARN);
+        return;
     }
-    else {
-        ger->rules = realloc(ger->rules, strlen(ger->rules) + strlen(ger->deps) + strlen(ger->rule_names[index]) + strlen(ger->cmds) + 4);
-        strcat(ger->rules, ger->rule_names[index]);
+    ger->deps = realloc(ger->deps, strlen(ger->deps) + strlen(av[*i + 1]) + 2);
+    strcat(ger->deps, "\t");
+    strcat(ger->deps, av[*i + 1]);
+    return;
+}
+
+static void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
+{
+    if (*i == ac - 1) {
+        gertrude_errors(av, ac, *i, CMDWARN);
+        return;
     }
+    if (av[*i + 1][0] == '-') {
+        gertrude_errors(av, ac, *i, CMDWARN);
+        return;
+    }
+    ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i + 1]) +
+    strlen("\n    ") + 1);
+    strcat(ger->cmds, "\n    ");
+    strcat(ger->cmds, av[*i + 1]);
+    return;
+}
+
+static void bufferize(char **av, int ac, int *i, gertrude_t *ger, int index)
+{
+    ger->rules = realloc(ger->rules, strlen(ger->rules) +
+    strlen(ger->rule_names[index]) + strlen(ger->deps) +
+    strlen(ger->cmds) + 1 + 2 + 1);
+    strcat(ger->rules, ger->rule_names[index]);
     strcat(ger->rules, ":");
     if (ger->deps != NULL) {
         strcat(ger->rules, ger->deps);
@@ -104,4 +89,24 @@ void rule_def(char **av, int ac, int *i, gertrude_t *ger)
     ger->deps = NULL;
     ger->cmds = NULL;
     *i -= 1;
+}
+
+void rule_def(char **av, int ac, int *i, gertrude_t *ger)
+{
+    int index = update_rule_name_list(av, ac, i, ger);
+
+    while (*i < ac && (strcmp(av[*i], "--deps") == 0 ||
+    strcmp(av[*i], "-D") == 0 || strcmp(av[*i], "--cmd") == 0 ||
+    strcmp(av[*i], "-c") == 0)) {
+        if (strcmp(av[*i], "--deps") == 0 || strcmp(av[*i], "-D") == 0) {
+            handle_deps(av, ac, i, ger);
+            *i += 1;
+        }
+        if (strcmp(av[*i], "--cmd") == 0 || strcmp(av[*i], "-c") == 0) {
+            handle_cmds(av, ac, i, ger);
+            *i += 1;
+        }
+        *i += 1;
+    }
+    bufferize(av, ac, i, ger, index);
 }
