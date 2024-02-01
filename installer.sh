@@ -3,7 +3,7 @@
 GREEN="\033[1;32m"
 
 sudo rm -rf /tmp/gertrude_installer
-git clone -q git@github.com:AshDev05/gertrude-cli.git /tmp/gertrude_installer
+git clone -q https://github.com/AshDev05/gertrude-cli.git /tmp/gertrude_installer
 make --silent -C /tmp/gertrude_installer/ re
 sudo mkdir -p /opt/gertrude-cli
 sudo cp -rf /tmp/gertrude_installer/* /opt/gertrude-cli
