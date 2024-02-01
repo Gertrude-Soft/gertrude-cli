@@ -25,7 +25,7 @@ All you have to do is to clone the repository and execute the installer.sh scrip
 ```bash
 cd
 
-git clone git@github.com:AshDev05/gertrude-cli.git
+git clone https://github.com/AshDev05/gertrude-cli.git
 
 cd gertrude-cli
 
