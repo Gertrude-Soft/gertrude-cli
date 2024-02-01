@@ -81,7 +81,7 @@ int main(int ac, char **av)
         configuration_command();
     } else if (strcmp(av[1], "update") == 0) {
         my_printf("%sGertrude is updating...%s\n", YELLOW, NC);
-        system("sh ./installer.sh");
+        system("sudo sh /opt/gertrude-cli/installer.sh");
         my_printf("%sSUCCESS!%s\n", GREEN, NC);
         exit(0);
     }
