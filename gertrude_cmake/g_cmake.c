@@ -8,16 +8,17 @@
 #include "../include/g_cmake.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 
 void init_struct(g_cmake_t *project)
 {
     project->exec = NULL;
     project->lang = NULL;
-    project->vars = malloc(sizeof(vars_t));
+    project->vars = NULL;
     project->cflags = NULL;
     project->src_dir = NULL;
-    project->targets = malloc(sizeof(targets_t));
+    project->targets = NULL;
     project->project_name = NULL;
     project->multi = 0;
 }
@@ -30,7 +31,8 @@ int cmake_interactive(int advanced)
     get_name(&project);
     set_src(&project);
     if (advanced) {
-
+        printf("== ADVANCED SETTINGS ==\n\n");
+        set_cflags(&project);
     }
     return 0;
 }

@@ -41,7 +41,10 @@ void sing_dir(g_cmake_t *project)
     buf[size] = '\0';
     printf("%s", NC);
     if (strcmp(buf, "\n") == 0) {
-        fprintf(stderr, "%sWARNING: No source directory set!\n%s", YELLOW, NC);
+        fprintf(stderr, "%sWARNING: No source directory set, defaulting to '.'!\n%s", YELLOW, NC);
+        project->src_dir = malloc(sizeof(char *) + sizeof(NULL));
+        project->src_dir[0] = strdup(".");
+        project->src_dir[1] = NULL;
         free(buf);
         return;
     }
@@ -73,7 +76,10 @@ void mult_dir(g_cmake_t *project)
     }
     if (project->src_dir == NULL) {
         project->multi = 0;
-        fprintf(stderr, "%sWARNING: No source directory set!\n%s", YELLOW, NC);
+        fprintf(stderr, "%sWARNING: No source directory set, defaulting to '.'!\n%s", YELLOW, NC);
+        project->src_dir = malloc(sizeof(char *) + sizeof(NULL));
+        project->src_dir[0] = strdup(".");
+        project->src_dir[1] = NULL;
         free(buf);
         free(suffix);
         return;

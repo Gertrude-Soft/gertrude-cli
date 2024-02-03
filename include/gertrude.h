@@ -29,6 +29,7 @@ void gertrude_errors(char **av, int ac, int i, int error);
 void print_header(gertrude_t *ger);
 char *set_phony(gertrude_t *gertrude);
 
+int cmake_interactive(int advanced);
 
 void free_gaza(gertrude_t *ger);
 

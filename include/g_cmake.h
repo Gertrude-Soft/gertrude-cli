@@ -34,5 +34,6 @@ typedef struct g_cmake_s {
 
 void get_name(g_cmake_t *project);
 void set_src(g_cmake_t *project);
+void set_cflags(g_cmake_t *project);
 
 #endif /* !G_CMAKE_H_ */

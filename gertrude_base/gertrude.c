@@ -23,14 +23,14 @@ static void print_file(gertrude_t *ger)
         print_header(ger);
     if (ger->variables != NULL)
         my_printf("%w", ger->dir, ger->variables);
-    if (ger->rules != NULL)
-        my_printf("%w", ger->dir, ger->rules);
     if (REMARKABLE == TRUE) {
         my_printf("%w", ger->dir, REM_ALL);
         my_printf("%w", ger->dir, REM_CLEAN);
         my_printf("%w", ger->dir, REM_FCLEAN);
         my_printf("%w", ger->dir, REM_RE);
     }
+    if (ger->rules != NULL)
+        my_printf("%w", ger->dir, ger->rules);
     my_printf("%w", ger->dir, REM_GERTRUDE);
     if (AUTO_PHONY == TRUE && ger->phony != NULL)
         my_printf("%w", ger->dir, ger->phony);
