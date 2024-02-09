@@ -62,6 +62,8 @@ int main(int ac, char **av)
     lua_State *L;
 
     addons_init(L);
+    call_addons(L, 1);
+    return 0;
     srand(time(0));
     ger.dir = malloc(strlen("./Makefile") + 1);
     strcpy(ger.dir, "./Makefile");

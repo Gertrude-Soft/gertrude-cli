@@ -34,6 +34,7 @@ void free_gaza(gertrude_t *ger);
 
 // ADDONS
 void addons_init(lua_State *L);
+void call_addons(lua_State *L, int g_timing);
 void bail(lua_State *L, char *error_code);
 
 #endif /* !GERTRUDE_H_ */

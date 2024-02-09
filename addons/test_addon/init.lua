@@ -7,3 +7,4 @@
 
 -- bonsoir je suis un addon je fais des choses
 
+print("hello world hehehe")
