@@ -24,10 +24,11 @@ void parse_args(int ac, char **av, gertrude_t *ger);
 void variable_def(char **av, int ac, int i, gertrude_t *ger);
 void directory_def(gertrude_t *ger, char **av, int i);
 void rule_def(char **av, int ac, int *i, gertrude_t *ger);
-void base_mkf(void);
+void base_mkf(gertrude_t *ger);
 void gertrude_errors(char **av, int ac, int i, int error);
 void print_header(gertrude_t *ger);
 char *set_phony(gertrude_t *gertrude);
+void print_file(gertrude_t *ger);
 
 
 void free_gaza(gertrude_t *ger);

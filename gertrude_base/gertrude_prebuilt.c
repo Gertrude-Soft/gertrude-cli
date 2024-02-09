@@ -9,15 +9,26 @@
 
 #include "../include/my.h"
 #include "../include/text_mod.h"
+#include "../include/gertrude.h"
+#include "../include/ger_conf.h"
 
-void base_mkf(void)
+void base_mkf(gertrude_t *ger)
 {
-    int err;
-
-    err = system("cp /opt/gertrude-cli/gertrude_prebuilt_mkf/Makefile ./");
-    if (err != 0) {
-        my_printf("%sYou need to run gertrude as sudo in order to generate \
-    a Makefile%s", RED, NC);
-        exit(84);
+    my_printf("%sFinalising...%s\n", YELLOW, NC);
+    if (HEADER == TRUE)
+        print_header(ger);
+    if (ger->variables != NULL)
+        my_printf("%w", ger->dir, ger->variables);
+    if (ger->rules != NULL)
+        my_printf("%w", ger->dir, ger->rules);
+    if (REMARKABLE == TRUE) {
+        my_printf("%w", ger->dir, REM_ALL);
+        my_printf("%w", ger->dir, REM_COMPILE);
+        my_printf("%w", ger->dir, REM_CLEAN);
+        my_printf("%w", ger->dir, REM_FCLEAN);
+        my_printf("%w", ger->dir, REM_RE);
     }
+    my_printf("%w", ger->dir, REM_GERTRUDE);
+    if (AUTO_PHONY == TRUE && ger->phony != NULL)
+        my_printf("%w", ger->dir, ger->phony);
 }

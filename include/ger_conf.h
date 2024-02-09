@@ -48,6 +48,7 @@
 /* DO NOT MODIFY BELOW THIS LINE */
 
     #define REM_ALL "all:\tcompile\tclean\tgertrude\n\n"
+    #define REM_COMPILE "compile:\n\n"
     #define REM_CLEAN "clean:\n\trm -f *.o\n\n"
     #define REM_FCLEAN "fclean:\tclean\n\trm -f $(NAME)\n\n"
     #define REM_RE "re:\tfclean\tall\n\n"

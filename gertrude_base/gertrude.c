@@ -16,7 +16,7 @@
 #include "../include/gertrude.h"
 #include "../include/ger_conf.h"
 
-static void print_file(gertrude_t *ger)
+void print_file(gertrude_t *ger)
 {
     my_printf("%sFinalising...%s\n", YELLOW, NC);
     if (HEADER == TRUE)
@@ -27,6 +27,7 @@ static void print_file(gertrude_t *ger)
         my_printf("%w", ger->dir, ger->rules);
     if (REMARKABLE == TRUE) {
         my_printf("%w", ger->dir, REM_ALL);
+        my_printf("%w", ger->dir, REM_COMPILE);
         my_printf("%w", ger->dir, REM_CLEAN);
         my_printf("%w", ger->dir, REM_FCLEAN);
         my_printf("%w", ger->dir, REM_RE);
@@ -57,8 +58,7 @@ int main(int ac, char **av)
     int fd;
 
     srand(time(0));
-    ger.dir = malloc(strlen("./Makefile") + 1);
-    strcpy(ger.dir, "./Makefile");
+    ger.dir = strdup("./Makefile");
     if (access(ger.dir, F_OK) == -1) {
         fd = open(ger.dir, O_CREAT);
         close(fd);
@@ -73,7 +73,7 @@ int main(int ac, char **av)
     my_printf("\n%sGertrude says Welcome!%s\n\n", GREEN, NC);
     if (ac == 1) {
         my_printf("%sGetting standard Makefile...%s\n", YELLOW, NC);
-        base_mkf();
+        base_mkf(&ger);
         my_printf("\n%sGood Plant%s\n", GREEN, NC);
         exit(0);
     }
