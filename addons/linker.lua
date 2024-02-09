@@ -46,6 +46,10 @@ linker = {
         "G_AFTER_PHONY",
         "G_BEFORE_HEADER",
         "G_AFTER_HEADER",
+        "G_BEFORE_WARN",
+        "G_AFTER_WARN",
+        "G_BEFORE_ERR",
+        "G_AFTER_ERR",
         "G_REPLACE",
     }
 }

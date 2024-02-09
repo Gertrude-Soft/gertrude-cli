@@ -7,6 +7,7 @@
 
 #ifndef GERTRUDE_H_
     #define GERTRUDE_H_
+    #include <lua.h>
 
 typedef struct g_tools_s {
     char *dir;
@@ -29,7 +30,10 @@ void gertrude_errors(char **av, int ac, int i, int error);
 void print_header(gertrude_t *ger);
 char *set_phony(gertrude_t *gertrude);
 
-
 void free_gaza(gertrude_t *ger);
+
+// ADDONS
+void addons_init(lua_State *L);
+void bail(lua_State *L, char *error_code);
 
 #endif /* !GERTRUDE_H_ */
