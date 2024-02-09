@@ -20,7 +20,7 @@ char *set_phony(gertrude_t *ger)
         return NULL;
     }
     strcpy(phony, ".PHONY:\t");
-    if (REMARKABLE == TRUE) {
+    if (REMARKABLE == true) {
         phony = realloc(phony, strlen(phony) + strlen("all\tclean\tfclean\tre") + 1);
         strcat(phony, "all\tclean\tfclean\tre");
         if (ger->rule_names == NULL) {

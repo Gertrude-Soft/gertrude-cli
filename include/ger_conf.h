@@ -8,9 +8,8 @@
 #ifndef GER_CONF_H_
     #define GER_CONF_H_
 
-    #define TRUE 1
-    #define FALSE 0
     #define CONFDIR "/opt/gertrude-cli/include/ger_conf.h"
+    #include <stdbool.h>
 
 /* DO NOT MODIFY ABOVE THIS LINE */
 
@@ -18,24 +17,24 @@
 // the terminal (using an even number is much recommended) - default 80
     #define ERROR_WIDTH 80
 
-// Rules like all, re, clean, fclean get affected automatically - default TRUE
+// Rules like all, re, clean, fclean get affected automatically - default true
 // Note, the gertrude rule will not be affected by this option
-    #define REMARKABLE TRUE
+    #define REMARKABLE true
 
 // This editor will be used when changing this configuration file
 // (from gertrude config command) - default "nano"
     #define EDITOR "nano"
 
-// If REMARKABLE is TRUE > The clean rule will also remove files that match
+// If REMARKABLE is true > The clean rule will also remove files that match
 // the specified pattern - default "vgcore*"
     #define EXTRA "vgcore*"
 
-// This defines whether to include a header or not in the Makefile - default TRUE
-    #define HEADER TRUE
+// This defines whether to include a header or not in the Makefile - default true
+    #define HEADER true
 
 // This defines whether your rules are added to a .PHONY at the end of the
-// generated Makefile (recommended TRUE) - default TRUE
-    #define AUTO_PHONY TRUE
+// generated Makefile (recommended true) - default true
+    #define AUTO_PHONY true
 
 // This is the default header that will be used in the Makefile, you can
 // modify it freely but be careful with the formatting.

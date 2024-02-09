@@ -12,7 +12,6 @@
 
 #include "../include/gertrude.h"
 #include "../include/my.h"
-#include "../include/text_mod.h"
 #include "../include/error_codes.h"
 
 // Modify ger->variables to store variables

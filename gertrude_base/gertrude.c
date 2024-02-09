@@ -19,13 +19,13 @@
 void print_file(gertrude_t *ger)
 {
     my_printf("%sFinalising...%s\n", YELLOW, NC);
-    if (HEADER == TRUE)
+    if (HEADER == true)
         print_header(ger);
     if (ger->variables != NULL)
         my_printf("%w", ger->dir, ger->variables);
     if (ger->rules != NULL)
         my_printf("%w", ger->dir, ger->rules);
-    if (REMARKABLE == TRUE) {
+    if (REMARKABLE == true) {
         my_printf("%w", ger->dir, REM_ALL);
         my_printf("%w", ger->dir, REM_COMPILE);
         my_printf("%w", ger->dir, REM_CLEAN);
@@ -33,7 +33,7 @@ void print_file(gertrude_t *ger)
         my_printf("%w", ger->dir, REM_RE);
     }
     my_printf("%w", ger->dir, REM_GERTRUDE);
-    if (AUTO_PHONY == TRUE && ger->phony != NULL)
+    if (AUTO_PHONY == true && ger->phony != NULL)
         my_printf("%w", ger->dir, ger->phony);
 }
 
