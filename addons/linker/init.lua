@@ -31,8 +31,10 @@ function Event:new(o, g_timing, g_exec)
 end
 
 ---@class linker
+---@field loop table[Event]
+---@field timings table[integer]
 linker = {
-    loop = {}, -- contains events that you iterate through
+    loop = {},
     timings = enum {
         "G_BEFORE_VAR",
         "G_AFTER_VAR",

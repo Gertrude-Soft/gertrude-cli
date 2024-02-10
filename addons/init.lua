@@ -5,7 +5,9 @@
 -- init.lua
 --
 
-require("addons.linker")
+package.path = package.path .. ';/opt/gertrude-cli/addons/?.lua;/opt/gertrude-cli/addons/?/init.lua'
+
+require("linker")
 LFS = require("lfs")
 
 for file in LFS.dir("/opt/gertrude-cli/addons") do
