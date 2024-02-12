@@ -4,15 +4,16 @@
 ** File description:
 ** Manages directory definition
 */
+
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 #include "../include/gertrude.h"
 #include "../include/text_mod.h"
-#include "../include/my.h"
 
 int is_dir(char *av)
 {
@@ -39,13 +40,13 @@ void directory_def(gertrude_t *ger, char **av, int i)
     int fd;
 
     if (is_dir(av[i])) {
-        ger->dir = malloc(my_strlen(av[i]) + 10);
-        my_printf("%sChanging directory...%s\n", YELLOW, NC);
+        free(ger->dir);
+        ger->dir = malloc(strlen(av[i]) + strlen("/makefile") + 1);
+        printf("%sChanging directory...%s\n", YELLOW, NC);
         strcpy(ger->dir, av[i]);
         strcat(ger->dir, "/Makefile");
     } else {
-        my_printf("\n%sGertrude says: please enter a valid\
-        directory!%s\n", RED, NC);
+        printf("\n%sGertrude says: please enter a valid directory!%s\n", RED, NC);
         exit(84);
     }
     if (access(ger->dir, F_OK) == -1) {

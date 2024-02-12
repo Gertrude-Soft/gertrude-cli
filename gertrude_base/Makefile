@@ -13,7 +13,7 @@ CC	=	gcc
 
 NAME	=	gertrude-cli
 
-CFLAGS	+=	-Wall -g3 -I../include -L../ -lmy
+CFLAGS	+=	-Wall -g3 -I../include
 
 all:	build	clean
 

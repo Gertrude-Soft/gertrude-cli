@@ -9,7 +9,6 @@
 #include <unistd.h>
 
 #include "../include/gertrude.h"
-#include "../include/my.h"
 
 void free_gaza(gertrude_t *ger)
 {

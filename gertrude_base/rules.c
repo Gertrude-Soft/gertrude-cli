@@ -6,7 +6,6 @@
 */
 
 #include "../include/gertrude.h"
-#include "../include/my.h"
 #include "../include/error_codes.h"
 
 #include <string.h>
@@ -64,8 +63,8 @@ static void handle_cmds(char **av, int ac, int *i, gertrude_t *ger)
         return;
     }
     ger->cmds = realloc(ger->cmds, strlen(ger->cmds) + strlen(av[*i + 1]) +
-    strlen("\n    ") + 1);
-    strcat(ger->cmds, "\n    ");
+    strlen("\n\t") + 1);
+    strcat(ger->cmds, "\n\t");
     strcat(ger->cmds, av[*i + 1]);
     return;
 }

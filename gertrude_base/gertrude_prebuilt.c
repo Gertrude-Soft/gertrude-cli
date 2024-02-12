@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 
-#include "../include/my.h"
 #include "../include/text_mod.h"
 
 void base_mkf(void)
@@ -16,7 +16,7 @@ void base_mkf(void)
 
     err = system("cp /opt/gertrude-cli/gertrude_prebuilt_mkf/Makefile ./");
     if (err != 0) {
-        my_printf("%sYou need to run gertrude as sudo in order to generate \
+        printf("%sYou need to run gertrude as sudo in order to generate \
     a Makefile%s", RED, NC);
         exit(84);
     }

@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
-#include "../include/my.h"
 #include "../include/error_codes.h"
 #include "../include/text_mod.h"
 #include "../include/gertrude.h"
@@ -71,20 +71,20 @@ static void error_header(char *gercode)
         strcpy(err_name, "GERTRUDE WARNING");
     }
     for (int i = 0; i < ERROR_WIDTH / 2 - (strlen(err_name) / 2); i++) {
-        my_printf("=");
+        printf("=");
     }
-    my_printf("%s%s%s", gercode, err_name, NC);
+    printf("%s%s%s", gercode, err_name, NC);
     for (int i = 0; i < ERROR_WIDTH / 2 - (strlen(err_name) / 2); i++) {
-        my_printf("=");
+        printf("=");
     }
-    my_printf("\n");
+    printf("\n");
     free(err_name);
     return;
 }
 
 static void custom_gertrude_message(char *gercode)
 {
-    my_printf("== %s%s%s\n",
+    printf("== %s%s%s\n",
     FYELLOW,
     (strcmp(gercode, GERWARN) == 0) ?
     GERTRWARNS[rand() % 11] : GERTERRORS[rand() % 13],
@@ -97,38 +97,38 @@ static int input_formating(char **av, int ac, int i, char *gercode)
     int count = 0;
     int err_index = ERROR_WIDTH;
 
-    my_printf("%s=input=%s ", gercode, NC);
+    printf("%s=input=%s ", gercode, NC);
     for (int j = i - 1; j < ac && count <= ERROR_WIDTH - 9; j++) {
         if (i == j) {
             err_index = count + strlen(av[j]);
-            my_printf("%s", RED);
+            printf("%s", RED);
         } else
-            my_printf("%s", NC);
+            printf("%s", NC);
         for (int k = 0; k < strlen(av[j]) && count <= ERROR_WIDTH - 9; k++) {
-            my_putchar(av[j][k]);
+            putchar(av[j][k]);
             count++;
         }
         if (j != ac - 1)
-            count += my_printf(" ");
+            count += printf(" ");
     }
-    my_printf("%s\n", NC);
+    printf("%s\n", NC);
     return (err_index + 7);
 }
 
 static void point_to_error(char *error, int err_index, char *gercode)
 {
-    my_printf("==");
+    printf("==");
     for (int j = 0; j < ERROR_WIDTH; j++) {
         if (j == err_index - 2 || j == ERROR_WIDTH - 3  ) {
-            my_printf("%s^%s", gercode, NC);
+            printf("%s^%s", gercode, NC);
             break;
         }
-        my_printf(" ");
+        printf(" ");
     }
-    my_printf("\n==");
+    printf("\n==");
     for (int j = 2; j < err_index && j < (ERROR_WIDTH - strlen(error)); j++)
-        my_printf(" ");
-    my_printf("%s%s%s\n", RED, error, NC);
+        printf(" ");
+    printf("%s%s%s\n", RED, error, NC);
 }
 
 static void input_error_formating(char **av, int ac, int i, char *gercode,
@@ -159,10 +159,10 @@ static void put_behavior_bottom(char **av, int i, char *behavior, char *gercode)
         name[size - 1] = '.';
         name[size] = '\0';
     }
-    my_printf("%s=behavior= %s'%s' %s%s%s\n", gercode, YELLOW, name, FYELLOW, behavior, NC);
+    printf("%s=behavior= %s'%s' %s%s%s\n", gercode, YELLOW, name, FYELLOW, behavior, NC);
     for (int j = 0; j < ERROR_WIDTH; j++)
-        my_printf("=");
-    my_printf("\n\n");
+        printf("=");
+    printf("\n\n");
     free(name);
 }
 
