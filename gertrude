@@ -1,0 +1,5 @@
+#!/bin/bash
+
+GERTRUDE_PATH=/opt/gertrude-cli/gertrude_base
+
+$GERTRUDE_PATH/gertrude-cli "$@"
