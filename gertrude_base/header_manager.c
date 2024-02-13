@@ -7,7 +7,6 @@
 
 #include "../include/gertrude.h"
 #include "../include/text_mod.h"
-#include "../include/my.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,7 +14,7 @@
 
 static void final(char *buffer, gertrude_t *ger)
 {
-    my_printf("%w", ger->dir, buffer);
+    write_in_file(ger->dir, buffer);
     free(buffer);
 }
 

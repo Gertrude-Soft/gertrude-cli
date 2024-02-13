@@ -6,17 +6,17 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 
-#include "../include/my.h"
 #include "../include/text_mod.h"
 
 void help(int ret)
 {
-    my_printf("\n%sGertrude HELP!\n", RED);
-    my_printf("\n%sGertrude-CLI, a Makefile tool%s\n", GREEN, NC);
-    my_printf("\n%sUSAGE:\n\n\
+    printf("\n%sGertrude HELP!\n", RED);
+    printf("\n%sGertrude-CLI, a Makefile tool%s\n", GREEN, NC);
+    printf("\n%sUSAGE:\n\n\
     %sgertrude%s [ -d directory ] [--var variable[=value]]* [[-r rule] [--deps dependencies]* [--cmd command]*]* [-epi]\n\n\n", YELLOW, GREEN, NC);
-    my_printf("%sDESCRIPTION:%s\n\n\
+    printf("%sDESCRIPTION:%s\n\n\
     DIRECTORY : Directory to the Makefile. No Makefile should exist there.\n\n\
     --var : Define %svariable%s using %svalue%s. If %svalue%s is not provided, it will be initialised to 42.\n\n\
     -r : Define %srule%s. By default, the rule created runs 'echo New Rule'. C.F. --deps, --cmd\n\n\

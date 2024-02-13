@@ -28,6 +28,7 @@ void base_mkf(void);
 void gertrude_errors(char **av, int ac, int i, int error);
 void print_header(gertrude_t *ger);
 char *set_phony(gertrude_t *gertrude);
+int write_in_file(const char *filename, const char *string);
 
 
 void free_gaza(gertrude_t *ger);
