@@ -16,9 +16,9 @@ EXEC	=	a.out
 
 CFLAGS	+=	-Wall -g3
 
-all:	build	clean
+all:	${EXEC}	gertrude
 
-build:	${OBJ}	gertrude
+$(EXEC):	${OBJ}
 	$(CC) -o $(EXEC) $(OBJ) $(CFLAGS)
 
 clean:
@@ -32,4 +32,4 @@ re:	fclean	all
 gertrude:
 	@echo -e "\n\n\033[3mGertrude-CLI - Makefile creation tool\033[0m\n"
 
-.PHONY:	all	build	clean	fclean	re
+.PHONY:	all	clean	fclean	re	gertrude
